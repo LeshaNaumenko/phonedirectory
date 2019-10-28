@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Alex",
+        "phoneNumbers": [
+            {
+                "number": "928402194214",
+                "companyName": "EPAM"
+            }
+        ]
+    },
+    {
+        "name": "John",
+        "phoneNumbers": [
+            {
+                "number": "7879",
+                "companyName": "EPAM"
+            }
+        ]
+    }
+]
