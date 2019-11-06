@@ -1,20 +1,42 @@
 [
-    {
-        "name": "Alex",
-        "phoneNumbers": [
-            {
-                "number": "928402194214",
-                "companyName": "EPAM"
-            }
-        ]
-    },
-    {
-        "name": "John",
-        "phoneNumbers": [
-            {
-                "number": "7879",
-                "companyName": "EPAM"
-            }
-        ]
-    }
+  {
+    "name": "Alex",
+    "phoneNumbers": [
+      {
+        "number": "928402194214",
+        "companyName": "EPAM"
+      },
+      {
+        "number": "9348509345",
+        "companyName": "IT-School"
+      }
+    ]
+  },
+  {
+    "name": "John",
+    "phoneNumbers": [
+      {
+        "number": "7879",
+        "companyName": "EPAM"
+      }
+    ]
+  },
+  {
+    "name": "Kate",
+    "phoneNumbers": [
+
+      {
+        "number": "099808124",
+        "companyName": "ROBCODE"
+      },
+      {
+        "number": "0239-324",
+        "companyName": "RMS"
+      },
+      {
+        "number": "45092385093",
+        "companyName": "EPAM"
+      }
+    ]
+  }
 ]
