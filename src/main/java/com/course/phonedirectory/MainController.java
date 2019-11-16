@@ -1,7 +1,10 @@
 package com.course.phonedirectory;
 
+import com.course.phonedirectory.exception.ServiceException;
 import com.course.phonedirectory.model.User;
+import com.course.phonedirectory.model.UserAccount;
 import com.course.phonedirectory.rep.UserRepository;
+import com.course.phonedirectory.service.UserAccountService;
 import com.course.phonedirectory.utils.PdfGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +39,11 @@ public class MainController {
     @Autowired
     private PdfGenerator pdfGenerator;
 
+    @Autowired
+    private UserAccountService userAccountService;
+
     @GetMapping("/")
-    public String forUser(Model model){
+    public String forUser(Model model) {
         model.addAttribute("message", "Hi there. Choose something");
         return "userPage";
     }
@@ -103,12 +109,13 @@ public class MainController {
     }
 
     @GetMapping("/personalinfo")
-    public String getPersonalInformation(Model model){
+    public String getPersonalInformation(Model model) {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         String username = null;
-        if(null != securityContext.getAuthentication()){
+        if (null != securityContext.getAuthentication()) {
             username = securityContext.getAuthentication().getName();
         }
+//        System.out.println(userRepository.findByName(username).get());
         userRepository.findByName(username)
                 .ifPresent(user -> model.addAttribute("user", user));
         return "user";
@@ -119,21 +126,31 @@ public class MainController {
         userRepository.deleteById(id);
         return "redirect:getallusers";
     }
+
     @GetMapping("/add")
     public String addUser() {
         return "add";
     }
 
     @PostMapping("/save")
-    public String saveUser(@RequestParam String username, @RequestParam String password,
-                            Model model) {
-        System.out.println(username);
-        System.out.println(password);
-//        System.out.println(number);
-//        System.out.println(company);
+    public String saveUser(@RequestParam String username, @RequestParam String password, Model model) {
         return "user";
     }
 
+    @GetMapping("/change")
+    public String changeNumber(@RequestParam int userAccountId,
+                               @RequestParam int phoneNumberId,
+                               @RequestParam String number,
+                               @RequestParam String company, Model model) {
+        try {
+            userAccountService.changeMobileOperator(userAccountId,phoneNumberId, number, company);
+        } catch (ServiceException e) {
+            System.out.println(e.getMessage());
+            model.addAttribute("error", e.getMessage());
+            return "error";
+        }
+        return "redirect:personalinfo";
+    }
 
 
     private ModelMap setMessage(ModelMap modelMap, String s) {

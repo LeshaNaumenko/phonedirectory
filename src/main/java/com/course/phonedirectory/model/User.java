@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,36 +23,19 @@ public class User {
 
     private String roles;
 
-    @OneToOne
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private UserAccount account;
-
     @OneToMany()
     @JoinColumn(name = "user_id")
-    private List<PhoneNumber> phoneNumbers = new ArrayList<>();
+    private List<UserAccount> userAccounts = new ArrayList<>();
 
-    public User(String name, String password, String roles, List<PhoneNumber> phoneNumbers) {
+    public User(String name, String password, String roles, List<UserAccount> userAccounts) {
         this.name = name;
         this.password = password;
         this.roles = roles;
-        this.phoneNumbers = phoneNumbers;
-    }
-
-    public User(String name, String password, String roles, UserAccount account, List<PhoneNumber> phoneNumbers) {
-        this.name = name;
-        this.password = password;
-        this.roles = roles;
-        this.account = account;
-        this.phoneNumbers = phoneNumbers;
+        this.userAccounts = userAccounts;
     }
 
     public User() {}
 
-    public void addNumber(PhoneNumber number){
-        if (!phoneNumbers.contains(number)){
-            phoneNumbers.add(number);
-        }
-    }
     public void setId(int id) {
         this.id = id;
     }
@@ -70,12 +52,12 @@ public class User {
         this.name = name;
     }
 
-    public List<PhoneNumber> getPhoneNumbers() {
-        return phoneNumbers;
+    public List<UserAccount> getUserAccounts() {
+        return userAccounts;
     }
 
-    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
-        this.phoneNumbers = phoneNumbers;
+    public void setUserAccounts(List<UserAccount> userAccounts) {
+        this.userAccounts = userAccounts;
     }
 
     public String getPassword() {
@@ -94,22 +76,6 @@ public class User {
         this.roles = roles;
     }
 
-    public UserAccount getAccount() {
-        return account;
-    }
-
-    public void setAccount(UserAccount account) {
-        this.account = account;
-    }
-
-    //    public List<String> getRoles() {
-//        return Arrays.asList( roles.split(","));
-//    }
-//
-//    public void setRoles(List<String> roles) {
-//            this.roles = String.join("," , roles);
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -119,12 +85,12 @@ public class User {
                 Objects.equals(name, user.name) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(roles, user.roles) &&
-                Objects.equals(phoneNumbers, user.phoneNumbers);
+                Objects.equals(userAccounts, user.userAccounts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, password, roles, phoneNumbers);
+        return Objects.hash(id, name, password, roles, userAccounts);
     }
 
     @Override
@@ -134,8 +100,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", roles='" + roles + '\'' +
-                ", account=" + account +
-                ", phoneNumbers=" + phoneNumbers +
+                ", userAccounts=" + userAccounts +
                 '}';
     }
 }

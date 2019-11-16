@@ -1,8 +1,7 @@
 package com.course.phonedirectory.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class UserAccount {
@@ -11,23 +10,35 @@ public class UserAccount {
     @GeneratedValue
     private int id;
 
-    private int cash = 0;
+    private Integer cash;
+
+    @OneToOne
+    @JoinColumn(name = "number_id", referencedColumnName = "id")
+    private PhoneNumber phoneNumber;
 
     // other fields
 
-    public UserAccount(int cash) {
+    public UserAccount() {
+    }
+
+    public UserAccount(Integer cash, PhoneNumber phoneNumber) {
         this.cash = cash;
+        this.phoneNumber = phoneNumber;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public PhoneNumber getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setCash(int cash) {
+    public void setPhoneNumber(PhoneNumber phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setCash(Integer cash) {
         this.cash = cash;
     }
 
@@ -39,7 +50,31 @@ public class UserAccount {
         this.cash = this.cash - cash;
     }
 
-    public int getCash() {
+    public Integer getCash() {
         return cash;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserAccount that = (UserAccount) o;
+        return id == that.id &&
+                Objects.equals(cash, that.cash) &&
+                Objects.equals(phoneNumber, that.phoneNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cash, phoneNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "UserAccount{" +
+                "id=" + id +
+                ", cash=" + cash +
+                ", number=" + phoneNumber +
+                '}';
     }
 }

@@ -1,4 +1,4 @@
 <#import "wrapperHTML.ftl" as wrapper>
 <@wrapper.page>
-Error
+    <h1>${error}</h1>
 </@wrapper.page>

@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
-public class BasicConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityBasicConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
@@ -51,10 +51,12 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/personalinfo").hasAnyRole("REGISTERED_USER", "BOOKING_MANAGER")
+                .antMatchers("/change/**").hasRole("BOOKING_MANAGER")
                 .antMatchers("/getallusers").hasRole("BOOKING_MANAGER")
+                .antMatchers("/").hasRole("BOOKING_MANAGER")
                 .antMatchers("/save").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/login").permitAll()

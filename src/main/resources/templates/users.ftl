@@ -9,6 +9,7 @@
                 <th scope="col">User</th>
                 <th scope="col">Number</th>
                 <th scope="col">Company</th>
+                <th scope="col">Balance</th>
             </tr>
             </thead>
             <tbody>
@@ -16,13 +17,14 @@
                 <tr>
                     <th scope="row">${user.id}</th>
                     <td>${user.name}</td>
-                    <td colspan="2">
+                    <td colspan="3">
                         <table class="table">
                             <tbody>
-                            <#list user.phoneNumbers as phonenumber>
+                            <#list user.userAccounts as useraccounts>
                             <tr>
-                                <td>${phonenumber.number}</td>
-                                <td>${phonenumber.companyName}</td>
+                                <td>${useraccounts.phoneNumber.number}</td>
+                                <td>${useraccounts.phoneNumber.companyName}</td>
+                                <td>${useraccounts.cash} $</td>
                             </tr>
                             </#list>
                             </tbody>
