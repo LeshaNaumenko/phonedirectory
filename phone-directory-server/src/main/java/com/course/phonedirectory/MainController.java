@@ -8,10 +8,10 @@ import com.course.phonedirectory.service.UserAccountService;
 import com.course.phonedirectory.utils.PdfGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.context.SecurityContext;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -108,18 +108,17 @@ public class MainController {
         return "user";
     }
 
-    @GetMapping("/personalinfo")
-    public String getPersonalInformation(Model model) {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        String username = null;
-        if (null != securityContext.getAuthentication()) {
-            username = securityContext.getAuthentication().getName();
-        }
-//        System.out.println(userRepository.findByName(username).get());
-        userRepository.findByName(username)
-                .ifPresent(user -> model.addAttribute("user", user));
-        return "user";
-    }
+//    @GetMapping("/personalinfo")
+//    public String getPersonalInformation(Model model) {
+//        SecurityContext securityContext = SecurityContextHolder.getContext();
+//        String username = null;
+//        if (null != securityContext.getAuthentication()) {
+//            username = securityContext.getAuthentication().getName();
+//        }
+//        userRepository.findByName(username)
+//                .ifPresent(user -> model.addAttribute("user", user));
+//        return "user";
+//    }
 
     @GetMapping("/delete")
     public String deleteUser(@RequestParam int id, Model model) {

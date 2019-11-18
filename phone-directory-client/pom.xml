@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <parent>
+        <groupId>com.epam.course</groupId>
+        <artifactId>phone-directory</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.epam.course.client</groupId>
+    <artifactId>phone-directory-client</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <!-- try to avoid copying of "model" package from server-->
+        <!-- but get "package com.course.phonedirectory.model does not exist"-->
+        <!-- try to resolve this issue using info from stackoverflow but failed-->
+<!--        <dependency>-->
+<!--            <groupId>com.epam.course.server</groupId>-->
+<!--            <artifactId>phone-directory-server</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--        </dependency>-->
+    </dependencies>
+
+</project>
